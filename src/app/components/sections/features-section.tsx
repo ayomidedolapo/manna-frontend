@@ -34,7 +34,7 @@ const features = [
     ),
     description:
       "Review items, confirm details, and pay securely — all in a smooth, distraction-free flow.",
-    image: "/images/checkout@3x 1.png",
+    image: "/images/Checkout M_023725.png",
     alt: "Manna secure checkout screen",
   },
   {
