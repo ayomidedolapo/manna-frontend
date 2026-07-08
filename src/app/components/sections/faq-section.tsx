@@ -4,34 +4,34 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "How do I place an order?",
+    question: "What is Manna and how does it work?",
     answer:
-      "Browse available groceries, add what you need to your cart, review your order, and complete checkout securely.",
+      "Manna is a marketplace that connects you with trusted food vendors, making it easy to order fresh groceries and food essentials from your phone. Simply browse available products, add what you need to your cart, review your order, complete checkout securely, and we coordinate delivery from the vendor to your doorstep.",
   },
   {
-    question: "Do you deliver outside Lagos?",
+    question: "Where is Manna available and how much does delivery cost?",
     answer:
-      "We currently focus on selected areas in Lagos. Delivery coverage will expand as more locations become available.",
+      "Manna is launching in selected areas of Lagos first, with plans to expand to more cities across Nigeria. Delivery fees depend on your location and the vendor you are ordering from, and you will always see the delivery cost before confirming your order.",
   },
   {
-    question: "How fresh are your produce?",
+    question: "What products can I buy on Manna?",
     answer:
-      "Our groceries are carefully selected and handled to help ensure they arrive fresh and ready for your kitchen.",
+      "At launch, you can shop for everyday essentials such as yam, rice, onions, potatoes, tomatoes, pepper, fresh produce, pantry staples, food items, household essentials, and more.",
   },
   {
-    question: "Can I cancel or modify my order?",
+    question: "How do you ensure product quality and freshness?",
     answer:
-      "You can request an update or cancellation before your order is processed. Contact support as soon as possible.",
+      "We carefully onboard and monitor vendors on our platform, encourage customer reviews, and continuously evaluate vendor performance. Groceries are also carefully selected and handled to help ensure they arrive fresh and ready for your kitchen.",
+  },
+  {
+    question: "How are orders delivered, and can I change or cancel an order?",
+    answer:
+      "Orders are delivered through trusted logistics partners to help ensure your groceries arrive safely and on time. You can request an update or cancellation before your order is processed by contacting support as soon as possible.",
   },
   {
     question: "Do you offer bulk orders for events or businesses?",
     answer:
       "Yes. We can support larger grocery orders for homes, events, offices, and businesses.",
-  },
-  {
-    question: "What products do you sell?",
-    answer:
-      "You can shop groceries such as fresh produce, pantry staples, food items, household essentials, and more.",
   },
 ];
 
