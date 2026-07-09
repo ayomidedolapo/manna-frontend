@@ -68,7 +68,7 @@ export default function SiteFooter() {
               </span>
 
               <span className="hidden min-[640px]:inline">
-                Manna connects local farmers
+                Manna connects local farmers and vendors
                 <br />
                 to you, delivering fresh Nigerian
                 <br />
@@ -183,9 +183,9 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <p className="mt-[46px] text-[14px] leading-none text-[#FFFDED] min-[640px]:mt-[clamp(3.75rem,5.5vw,5.5rem)] min-[640px]:text-[clamp(0.9rem,1.2vw,1.05rem)]">
-          Copyright <span className="mx-1 text-[1.25em]">©</span> 2025.{" "}
-          <span className="text-[#E0EE29]">Align.</span> All Rights Reserved.
+        <p className="mt-[46px] text-center text-[14px] leading-none text-[#FFFDED] min-[640px]:mt-[clamp(3.75rem,5.5vw,5.5rem)] min-[640px]:text-[clamp(0.9rem,1.2vw,1.05rem)]">
+  Copyright <span className="mx-1 text-[1.25em]">©</span> 2026.{" "}
+  <span className="text-[#E0EE29]">Manna.</span> All Rights Reserved.
         </p>
       </div>
     </footer>

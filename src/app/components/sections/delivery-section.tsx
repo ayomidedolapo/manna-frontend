@@ -21,7 +21,7 @@ export default function DeliverySection() {
 
           <p className="mx-auto mt-3 max-w-[330px] text-[clamp(0.78rem,3.2vw,0.95rem)] leading-[1.5] tracking-[-0.02em] text-[#072720] min-[640px]:mt-6 min-[640px]:max-w-[300px] min-[640px]:text-[clamp(0.9rem,1.25vw,1.3rem)]">
             Staples like rice, oil, and veggies—order now and get delivery in
-            hours. We’ve got you in Lagos.
+            minutes. We’ve got you in Lagos.
           </p>
 
           <a

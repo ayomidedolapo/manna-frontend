@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -19,17 +20,21 @@ const ASSETS = {
 };
 
 const navItems = [
-  { label: "Home", href: "#home" },
+ { label: "Home", href: "/" },
   { label: "About Us", href: "#about" },
   { label: "Shop", href: "#shop" },
-  { label: "Sell on Manna", href: "#sell-on-manna" },
-  { label: "B2B", href: "#b2b" },
+  { label: "Sell on Manna", href: "/sell-on-manna" },
+  { label: "B2B", href: "/b2b" },
   { label: "Log In/Sign Up", href: "#auth" },
 ] as const;
 
 type NavLabel = (typeof navItems)[number]["label"];
 type PopoverName = "location" | "cart" | "profile" | null;
-
+function getNavLabelForPath(pathname: string): NavLabel {
+  if (pathname.startsWith("/sell-on-manna")) return "Sell on Manna";
+  if (pathname.startsWith("/b2b")) return "B2B";
+  return "Home";
+}
 type SearchFormProps = {
   compact?: boolean;
   query: string;
@@ -128,17 +133,22 @@ export function SiteHeader() {
     Partial<Record<NavLabel, HTMLAnchorElement | null>>
   >({});
 
+const pathname = usePathname();
+
   const [query, setQuery] = useState("");
   const [typingTick, setTypingTick] = useState(0);
-  const [activeNav, setActiveNav] = useState<NavLabel>("Home");
+  const [activeNav, setActiveNav] = useState<NavLabel>(() =>
+    getNavLabelForPath(pathname),
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activePopover, setActivePopover] = useState<PopoverName>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
   const [indicator, setIndicator] = useState({
-    center: 0,
-    ready: false,
-  });
+  center: 0,
+  width: 0,
+  ready: false,
+});
 
   const mobileNavItems = navItems.filter(
     (item) => item.label !== "Home" && item.label !== "Log In/Sign Up",
@@ -174,26 +184,32 @@ export function SiteHeader() {
 
     setIndicator({
       center: linkRect.left - navRect.left + linkRect.width / 2,
+      width: linkRect.width,
       ready: true,
     });
   }, [activeNav]);
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(updateIndicator);
-    const observer = new ResizeObserver(updateIndicator);
+  const frame = window.requestAnimationFrame(updateIndicator);
+  const observer = new ResizeObserver(updateIndicator);
+  const navNode = navRef.current;
 
-    if (navRef.current) {
-      observer.observe(navRef.current);
-    }
+  if (navNode) {
+    observer.observe(navNode);
+    navNode.addEventListener("animationend", updateIndicator);
+  }
 
-    window.addEventListener("resize", updateIndicator);
+  window.addEventListener("resize", updateIndicator);
+  window.addEventListener("load", updateIndicator);
 
-    return () => {
-      window.cancelAnimationFrame(frame);
-      observer.disconnect();
-      window.removeEventListener("resize", updateIndicator);
-    };
-  }, [updateIndicator]);
+  return () => {
+    window.cancelAnimationFrame(frame);
+    observer.disconnect();
+    navNode?.removeEventListener("animationend", updateIndicator);
+    window.removeEventListener("resize", updateIndicator);
+    window.removeEventListener("load", updateIndicator);
+  };
+}, [updateIndicator]);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -305,7 +321,7 @@ export function SiteHeader() {
               <span className="flex flex-col leading-none">
                 <span className="text-[16px] text-[#dffbcb]">Location</span>
                 <span className="mt-2 text-[20px] text-[#fffded]">
-                  Nigeria
+                  Lagos, Nigeria
                 </span>
               </span>
 
@@ -327,22 +343,22 @@ export function SiteHeader() {
                 </p>
 
                 <button
-                  type="button"
-                  onClick={() => {
-                    showNotice("Delivery location is set to Nigeria.");
-                    setActivePopover(null);
-                  }}
-                  className="flex w-full items-center justify-between rounded-xl bg-[#086453] px-3 py-3 text-left text-sm transition-colors hover:bg-[#217362]"
-                >
-                  <span>
-                    <span className="block">Nigeria</span>
-                    <span className="mt-1 block text-xs text-[#dffbcb]">
-                      Current delivery country
-                    </span>
-                  </span>
+  type="button"
+  onClick={() => {
+    showNotice("Delivery location is set to Lagos, Nigeria.");
+    setActivePopover(null);
+  }}
+  className="flex w-full items-center justify-between rounded-xl bg-[#086453] px-3 py-3 text-left text-sm transition-colors hover:bg-[#217362]"
+>
+  <span>
+    <span className="block">Lagos, Nigeria</span>
+    <span className="mt-1 block text-xs text-[#dffbcb]">
+      Current delivery location
+    </span>
+  </span>
 
-                  <span className="text-xs text-[#e0ee29]">Selected</span>
-                </button>
+  <span className="text-xs text-[#e0ee29]">Selected</span>
+</button>
               </div>
             )}
           </div>
@@ -471,14 +487,15 @@ export function SiteHeader() {
                 </a>
               ))}
 
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute bottom-0 left-0 h-px w-[80px] rounded-full bg-[#e0ee29] shadow-[0_0_12px_rgba(224,238,41,0.6)] will-change-transform transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
-                style={{
-                  transform: `translate3d(${indicator.center}px, 0, 0) translateX(-50%)`,
-                  opacity: indicator.ready ? 1 : 0,
-                }}
-              />
+             <span
+  aria-hidden="true"
+  className="pointer-events-none absolute bottom-0 left-0 h-px rounded-full bg-[#e0ee29] shadow-[0_0_12px_rgba(224,238,41,0.6)] will-change-transform transition-[transform,width,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+  style={{
+    width: `${indicator.width}px`,
+    transform: `translate3d(${indicator.center}px, 0, 0) translateX(-50%)`,
+    opacity: indicator.ready ? 1 : 0,
+  }}
+/>
             </div>
           </nav>
         </div>

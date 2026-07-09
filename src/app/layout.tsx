@@ -20,8 +20,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={poppins.variable}>
-      <body className={poppins.className}>
+    <html lang="en" className={poppins.variable} suppressHydrationWarning>
+      <body className={poppins.className} suppressHydrationWarning>
   <SmoothScroll>{children}</SmoothScroll>
 </body>
     </html>
