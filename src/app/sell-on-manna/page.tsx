@@ -6,7 +6,7 @@ import HowItWorksSection from "../components/sections/how-it-works-section";
 import BenefitsSection from "../components/sections/benefits-section";
 import PricingSection from "../components/sections/pricing-section";
 import AudienceFaqSection from "../components/sections/audience-faq-section";
-import Image from "next/image";
+import { IconVerifiedBadge } from "../components/ui/icons";
 import {
   vendorTitles,
   vendorSteps,
@@ -27,15 +27,7 @@ export default function SellOnMannaPage() {
       <SiteHeader />
 
       <CenteredHeroSection
-        eyebrowIcon={
-          <Image
-            src="/icons/streamline-ultimate-color_farmers-market-kiosk-1.png"
-            alt=""
-            width={24}
-            height={24}
-            className="h-full w-full object-contain"
-          />
-        }
+        eyebrowIcon={<IconVerifiedBadge className="h-full w-full" />}
         eyebrowText="Sell on Manna"
         titles={vendorTitles}
         subtitle="Join Manna as a vendor and reach households and businesses across Lagos looking for fresh produce — no shop and no delivery fleet required."

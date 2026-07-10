@@ -11,6 +11,38 @@ const base = {
   strokeLinejoin: "round" as const,
 };
 
+export function IconVerifiedBadge(props: SVGProps<SVGSVGElement>) {
+  const lobes = Array.from({ length: 8 }, (_, i) => {
+    const angle = (i * 45 * Math.PI) / 180;
+    const cx = 12 + 6 * Math.cos(angle);
+    const cy = 12 + 6 * Math.sin(angle);
+    return { cx: Number(cx.toFixed(2)), cy: Number(cy.toFixed(2)) };
+  });
+
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <circle cx="12" cy="12" r="7.4" fill="#00A14B" />
+      {lobes.map((lobe) => (
+        <circle
+          key={`${lobe.cx}-${lobe.cy}`}
+          cx={lobe.cx}
+          cy={lobe.cy}
+          r="5.6"
+          fill="#00A14B"
+        />
+      ))}
+      <path
+        fill="none"
+        stroke="#FFFDED"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m7.7 12.3 3 3 5.6-6.2"
+      />
+    </svg>
+  );
+}
+
 export function IconUtensils(props: IconProps) {
   return (
     <svg {...base} {...props}>
@@ -155,19 +187,19 @@ export function IconMessageCircle(props: IconProps) {
 
 export function IconOfficeColor(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 48 48" {...props}>
-      <rect x="10" y="6" width="20" height="38" rx="2" fill="#086453" />
-      <rect x="26" y="16" width="14" height="28" rx="2" fill="#00A14B" />
-      <rect x="14" y="11" width="4" height="4" rx="0.5" fill="#E0EE29" />
-      <rect x="22" y="11" width="4" height="4" rx="0.5" fill="#E0EE29" />
-      <rect x="14" y="19" width="4" height="4" rx="0.5" fill="#E0EE29" />
-      <rect x="22" y="19" width="4" height="4" rx="0.5" fill="#E0EE29" />
-      <rect x="14" y="27" width="4" height="4" rx="0.5" fill="#E0EE29" />
-      <rect x="22" y="27" width="4" height="4" rx="0.5" fill="#E0EE29" />
-      <rect x="30" y="21" width="3.4" height="3.4" rx="0.5" fill="#DFFBCB" />
-      <rect x="30" y="28" width="3.4" height="3.4" rx="0.5" fill="#DFFBCB" />
-      <rect x="30" y="35" width="3.4" height="3.4" rx="0.5" fill="#DFFBCB" />
-      <rect x="18" y="36" width="6" height="8" rx="1" fill="#E0EE29" />
+    <svg viewBox="0 0 24 24" {...props}>
+      <rect x="6" y="2" width="10" height="20" rx="1" fill="#086453" />
+      <rect x="8" y="4.5" width="6" height="2.6" rx="0.6" fill="#FFFDED" />
+      <rect x="8" y="8.5" width="6" height="2.6" rx="0.6" fill="#FFFDED" />
+      <rect x="8" y="12.5" width="6" height="2.6" rx="0.6" fill="#FFFDED" />
+      <rect x="8" y="16.5" width="6" height="2.6" rx="0.6" fill="#FFFDED" />
+      <rect x="13" y="9" width="8.5" height="13" rx="1" fill="#00A14B" />
+      <rect x="15" y="11.2" width="2" height="2" rx="0.4" fill="#FFFDED" />
+      <rect x="18.5" y="11.2" width="2" height="2" rx="0.4" fill="#FFFDED" />
+      <rect x="15" y="14.7" width="2" height="2" rx="0.4" fill="#FFFDED" />
+      <rect x="18.5" y="14.7" width="2" height="2" rx="0.4" fill="#FFFDED" />
+      <rect x="15.7" y="18.2" width="3.4" height="3.8" rx="0.5" fill="#E0EE29" />
+      <rect x="2" y="21" width="20" height="2" rx="1" fill="#E0EE29" />
     </svg>
   );
 }

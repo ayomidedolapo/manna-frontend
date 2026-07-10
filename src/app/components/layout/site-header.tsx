@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   useCallback,
@@ -20,21 +21,21 @@ const ASSETS = {
 };
 
 const navItems = [
- { label: "Home", href: "/" },
+  { label: "Home", href: "/" },
   { label: "About Us", href: "#about" },
-  { label: "Shop", href: "#shop" },
   { label: "Sell on Manna", href: "/sell-on-manna" },
   { label: "B2B", href: "/b2b" },
-  { label: "Log In/Sign Up", href: "#auth" },
 ] as const;
 
 type NavLabel = (typeof navItems)[number]["label"];
 type PopoverName = "location" | "cart" | "profile" | null;
+
 function getNavLabelForPath(pathname: string): NavLabel {
   if (pathname.startsWith("/sell-on-manna")) return "Sell on Manna";
   if (pathname.startsWith("/b2b")) return "B2B";
   return "Home";
 }
+
 type SearchFormProps = {
   compact?: boolean;
   query: string;
@@ -52,7 +53,7 @@ function SearchForm({
 }: SearchFormProps) {
   const shellClassName = compact
     ? "manna-search-shell relative isolate flex h-[38px] w-full items-center overflow-hidden rounded-full bg-[#217362] px-5"
-    : "manna-search-shell relative isolate flex h-[56px] w-full items-center overflow-hidden rounded-full bg-[#217362] px-6";
+    : "manna-search-shell relative isolate flex h-[48px] w-full items-center overflow-hidden rounded-full bg-[#217362] px-5";
 
   return (
     <form
@@ -76,26 +77,26 @@ function SearchForm({
         aria-label="Search Manna products"
         value={query}
         onChange={(event) => onQueryChange(event.target.value)}
-        placeholder="Discover our available fresh farm products..."
+        placeholder="Search fresh farm products..."
         className={
           compact
             ? "relative z-10 min-w-0 flex-1 bg-transparent text-[10px] font-normal text-[#fffded] caret-[#e0ee29] outline-none placeholder:text-[#fffded]/85"
-            : "relative z-10 min-w-0 flex-1 bg-transparent text-[18px] font-normal text-[#fffded] caret-[#e0ee29] outline-none placeholder:text-[#fffded]/85"
+            : "relative z-10 min-w-0 flex-1 bg-transparent text-[14px] font-normal text-[#fffded] caret-[#e0ee29] outline-none placeholder:text-[#fffded]/85"
         }
       />
 
       <button
         type="submit"
         aria-label="Search products"
-        className="relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full transition-transform duration-200 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e0ee29]"
+        className="relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform duration-200 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e0ee29]"
       >
         <Image
           src={ASSETS.search}
           alt=""
-          width={28}
-          height={28}
+          width={22}
+          height={22}
           className={
-            compact ? "h-6 w-6 object-contain" : "h-7 w-7 object-contain"
+            compact ? "h-5 w-5 object-contain" : "h-[22px] w-[22px] object-contain"
           }
         />
       </button>
@@ -133,7 +134,7 @@ export function SiteHeader() {
     Partial<Record<NavLabel, HTMLAnchorElement | null>>
   >({});
 
-const pathname = usePathname();
+  const pathname = usePathname();
 
   const [query, setQuery] = useState("");
   const [typingTick, setTypingTick] = useState(0);
@@ -145,14 +146,12 @@ const pathname = usePathname();
   const [notice, setNotice] = useState<string | null>(null);
 
   const [indicator, setIndicator] = useState({
-  center: 0,
-  width: 0,
-  ready: false,
-});
+    center: 0,
+    width: 0,
+    ready: false,
+  });
 
-  const mobileNavItems = navItems.filter(
-    (item) => item.label !== "Home" && item.label !== "Log In/Sign Up",
-  );
+  const mobileNavItems = navItems.filter((item) => item.label !== "Home");
 
   const closeMenus = () => {
     setMobileMenuOpen(false);
@@ -173,6 +172,11 @@ const pathname = usePathname();
     closeMenus();
   };
 
+  const promptAuth = () => {
+    setActivePopover("profile");
+    showNotice("Sign in or create an account to search Manna.");
+  };
+
   const updateIndicator = useCallback(() => {
     const nav = navRef.current;
     const activeLink = navLinkRefs.current[activeNav];
@@ -190,26 +194,26 @@ const pathname = usePathname();
   }, [activeNav]);
 
   useEffect(() => {
-  const frame = window.requestAnimationFrame(updateIndicator);
-  const observer = new ResizeObserver(updateIndicator);
-  const navNode = navRef.current;
+    const frame = window.requestAnimationFrame(updateIndicator);
+    const observer = new ResizeObserver(updateIndicator);
+    const navNode = navRef.current;
 
-  if (navNode) {
-    observer.observe(navNode);
-    navNode.addEventListener("animationend", updateIndicator);
-  }
+    if (navNode) {
+      observer.observe(navNode);
+      navNode.addEventListener("animationend", updateIndicator);
+    }
 
-  window.addEventListener("resize", updateIndicator);
-  window.addEventListener("load", updateIndicator);
+    window.addEventListener("resize", updateIndicator);
+    window.addEventListener("load", updateIndicator);
 
-  return () => {
-    window.cancelAnimationFrame(frame);
-    observer.disconnect();
-    navNode?.removeEventListener("animationend", updateIndicator);
-    window.removeEventListener("resize", updateIndicator);
-    window.removeEventListener("load", updateIndicator);
-  };
-}, [updateIndicator]);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+      navNode?.removeEventListener("animationend", updateIndicator);
+      window.removeEventListener("resize", updateIndicator);
+      window.removeEventListener("load", updateIndicator);
+    };
+  }, [updateIndicator]);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -259,15 +263,7 @@ const pathname = usePathname();
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const cleanQuery = query.trim();
-
-    if (!cleanQuery) {
-      showNotice("Enter a product name to search Manna.");
-      return;
-    }
-
-    showNotice(`Search preview ready for “${cleanQuery}”.`);
+    promptAuth();
   };
 
   return (
@@ -280,8 +276,8 @@ const pathname = usePathname();
         <div className="relative h-[180px] w-full">
           {/* Logo */}
           <div className="manna-reveal manna-reveal--1 absolute left-12 top-[31px] z-30">
-            <a
-              href="#home"
+            <Link
+              href="/"
               aria-label="Manna home"
               onClick={() => selectNavItem("Home")}
               className="block transition-transform duration-200 hover:scale-[1.02]"
@@ -294,7 +290,7 @@ const pathname = usePathname();
                 priority
                 className="h-auto w-[157px]"
               />
-            </a>
+            </Link>
           </div>
 
           {/* Location */}
@@ -343,31 +339,31 @@ const pathname = usePathname();
                 </p>
 
                 <button
-  type="button"
-  onClick={() => {
-    showNotice("Delivery location is set to Lagos, Nigeria.");
-    setActivePopover(null);
-  }}
-  className="flex w-full items-center justify-between rounded-xl bg-[#086453] px-3 py-3 text-left text-sm transition-colors hover:bg-[#217362]"
->
-  <span>
-    <span className="block">Lagos, Nigeria</span>
-    <span className="mt-1 block text-xs text-[#dffbcb]">
-      Current delivery location
-    </span>
-  </span>
+                  type="button"
+                  onClick={() => {
+                    showNotice("Delivery location is set to Lagos, Nigeria.");
+                    setActivePopover(null);
+                  }}
+                  className="flex w-full items-center justify-between rounded-xl bg-[#086453] px-3 py-3 text-left text-sm transition-colors hover:bg-[#217362]"
+                >
+                  <span>
+                    <span className="block">Lagos, Nigeria</span>
+                    <span className="mt-1 block text-xs text-[#dffbcb]">
+                      Current delivery location
+                    </span>
+                  </span>
 
-  <span className="text-xs text-[#e0ee29]">Selected</span>
-</button>
+                  <span className="text-xs text-[#e0ee29]">Selected</span>
+                </button>
               </div>
             )}
           </div>
 
           {/* Search */}
           <div
-            className="manna-reveal manna-reveal--3 absolute left-[520px] top-[27px] z-10"
+            className="manna-reveal manna-reveal--3 absolute left-[520px] top-[31px] z-10"
             style={{
-              width: "min(850px, calc(100vw - 670px))",
+              width: "min(800px, calc(100vw - 700px))",
             }}
           >
             <SearchForm
@@ -378,7 +374,7 @@ const pathname = usePathname();
             />
           </div>
 
-          {/* Right Icons + popovers always overlay search */}
+          {/* Cart + Profile icons — cart gates to signup, same as search */}
           <div className="manna-reveal manna-reveal--4 absolute right-[94px] top-[41px] z-50 flex items-center gap-5">
             <div className="relative">
               <button
@@ -406,16 +402,12 @@ const pathname = usePathname();
                   <p className="text-sm">Your cart is empty</p>
 
                   <p className="mt-1 text-xs leading-5 text-[#dffbcb]">
-                    Add fresh products from the Shop section when it is ready.
+                    Sign up or log in to start shopping.
                   </p>
 
-                  <a
-                    href="#shop"
-                    onClick={() => selectNavItem("Shop")}
-                    className="mt-4 block rounded-full bg-[#00a14b] px-4 py-2 text-center text-xs text-white transition-colors hover:bg-[#e0ee29] hover:text-[#072720]"
-                  >
-                    Browse products
-                  </a>
+                  <div className="mt-4">
+                    <AuthButtons onClick={closeMenus} />
+                  </div>
                 </div>
               )}
             </div>
@@ -423,7 +415,7 @@ const pathname = usePathname();
             <div className="relative">
               <button
                 type="button"
-                aria-label="Open account options"
+                aria-label="Log in or sign up"
                 aria-expanded={activePopover === "profile"}
                 onClick={() =>
                   setActivePopover((current) =>
@@ -450,9 +442,7 @@ const pathname = usePathname();
                   </p>
 
                   <div className="mt-4">
-                    <AuthButtons
-                      onClick={() => selectNavItem("Log In/Sign Up")}
-                    />
+                    <AuthButtons onClick={closeMenus} />
                   </div>
                 </div>
               )}
@@ -487,15 +477,15 @@ const pathname = usePathname();
                 </a>
               ))}
 
-             <span
-  aria-hidden="true"
-  className="pointer-events-none absolute bottom-0 left-0 h-px rounded-full bg-[#e0ee29] shadow-[0_0_12px_rgba(224,238,41,0.6)] will-change-transform transition-[transform,width,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
-  style={{
-    width: `${indicator.width}px`,
-    transform: `translate3d(${indicator.center}px, 0, 0) translateX(-50%)`,
-    opacity: indicator.ready ? 1 : 0,
-  }}
-/>
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-0 left-0 h-px rounded-full bg-[#e0ee29] shadow-[0_0_12px_rgba(224,238,41,0.6)] will-change-transform transition-[transform,width,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+                style={{
+                  width: `${indicator.width}px`,
+                  transform: `translate3d(${indicator.center}px, 0, 0) translateX(-50%)`,
+                  opacity: indicator.ready ? 1 : 0,
+                }}
+              />
             </div>
           </nav>
         </div>
@@ -522,8 +512,8 @@ const pathname = usePathname();
               </span>
             </button>
 
-            <a
-              href="#home"
+            <Link
+              href="/"
               aria-label="Manna home"
               onClick={() => selectNavItem("Home")}
               className="ml-4 transition-transform duration-200 hover:scale-[1.02]"
@@ -536,23 +526,60 @@ const pathname = usePathname();
                 priority
                 className="h-auto w-[89px]"
               />
-            </a>
+            </Link>
           </div>
 
-          <div className="relative">
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <button
+                type="button"
+                aria-label="Open shopping cart"
+                aria-expanded={activePopover === "cart"}
+                onClick={() =>
+                  setActivePopover((current) =>
+                    current === "cart" ? null : "cart",
+                  )
+                }
+                className="grid h-7 w-7 place-items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0ee29]"
+              >
+                <Image
+                  src={ASSETS.cart}
+                  alt=""
+                  width={24}
+                  height={24}
+                  className="h-6 w-6 object-contain"
+                />
+              </button>
+
+              {activePopover === "cart" && (
+                <div className="absolute right-0 top-[42px] z-[80] w-[255px] rounded-2xl border border-[#dffbcb]/20 bg-[#072720] p-4 shadow-2xl">
+                  <p className="text-sm">Your cart is empty</p>
+
+                  <p className="mt-1 text-xs leading-5 text-[#dffbcb]">
+                    Sign up or log in to start shopping.
+                  </p>
+
+                  <div className="mt-4">
+                    <AuthButtons onClick={closeMenus} />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="relative">
             <button
               type="button"
-              aria-label="Open shopping cart"
-              aria-expanded={activePopover === "cart"}
+              aria-label="Log in or sign up"
+              aria-expanded={activePopover === "profile"}
               onClick={() =>
                 setActivePopover((current) =>
-                  current === "cart" ? null : "cart",
+                  current === "profile" ? null : "profile",
                 )
               }
               className="grid h-7 w-7 place-items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0ee29]"
             >
               <Image
-                src={ASSETS.cart}
+                src={ASSETS.profile}
                 alt=""
                 width={24}
                 height={24}
@@ -560,23 +587,20 @@ const pathname = usePathname();
               />
             </button>
 
-            {activePopover === "cart" && (
+            {activePopover === "profile" && (
               <div className="absolute right-0 top-[42px] z-[80] w-[255px] rounded-2xl border border-[#dffbcb]/20 bg-[#072720] p-4 shadow-2xl">
-                <p className="text-sm">Your cart is empty</p>
+                <p className="text-sm">Welcome to Manna</p>
 
                 <p className="mt-1 text-xs leading-5 text-[#dffbcb]">
-                  Add fresh products from the Shop section when it is ready.
+                  Sign in or create an account to continue.
                 </p>
 
-                <a
-                  href="#shop"
-                  onClick={() => selectNavItem("Shop")}
-                  className="mt-4 block rounded-full bg-[#00a14b] px-4 py-2 text-center text-xs text-white"
-                >
-                  Browse products
-                </a>
+                <div className="mt-4">
+                  <AuthButtons onClick={closeMenus} />
+                </div>
               </div>
             )}
+          </div>
           </div>
         </div>
 
@@ -669,7 +693,7 @@ const pathname = usePathname();
           </div>
 
           <div className="mt-4">
-            <AuthButtons onClick={() => selectNavItem("Log In/Sign Up")} />
+            <AuthButtons onClick={closeMenus} />
           </div>
         </div>
       </aside>
