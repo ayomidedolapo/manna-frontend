@@ -31,7 +31,7 @@ export default function SellOnMannaPage() {
         eyebrowText="Sell on Manna"
         titles={vendorTitles}
         subtitle="Join Manna as a vendor and reach households and businesses across Lagos looking for fresh produce — no shop and no delivery fleet required."
-        primaryCta={{ label: "Become a vendor", href: "#vendor-signup" }}
+        primaryCta={{ label: "Become a vendor", href: "/signup?type=vendor" }}
         secondaryCta={{ label: "See how it works", href: "#how-it-works" }}
       />
 

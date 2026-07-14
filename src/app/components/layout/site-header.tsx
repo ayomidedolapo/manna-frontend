@@ -22,7 +22,7 @@ const ASSETS = {
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "#about" },
+  { label: "About Us", href: "/about-us" },
   { label: "Sell on Manna", href: "/sell-on-manna" },
   { label: "B2B", href: "/b2b" },
 ] as const;
@@ -31,6 +31,7 @@ type NavLabel = (typeof navItems)[number]["label"];
 type PopoverName = "location" | "cart" | "profile" | null;
 
 function getNavLabelForPath(pathname: string): NavLabel {
+  if (pathname.startsWith("/about-us")) return "About Us";
   if (pathname.startsWith("/sell-on-manna")) return "Sell on Manna";
   if (pathname.startsWith("/b2b")) return "B2B";
   return "Home";
@@ -107,21 +108,21 @@ function SearchForm({
 function AuthButtons({ onClick }: { onClick: () => void }) {
   return (
     <div className="grid grid-cols-2 gap-3">
-      <a
-        href="#auth"
+      <Link
+        href="/login"
         onClick={onClick}
         className="flex h-7 items-center justify-center rounded-full bg-[#00a14b] text-[11px] font-normal text-white transition-colors hover:bg-[#086453]"
       >
         Log In
-      </a>
+      </Link>
 
-      <a
-        href="#auth"
+      <Link
+        href="/signup"
         onClick={onClick}
         className="flex h-7 items-center justify-center rounded-full border border-[#00a14b] text-[11px] font-normal text-[#00a14b] transition-colors hover:bg-[#00a14b] hover:text-white"
       >
         Sign Up
-      </a>
+      </Link>
     </div>
   );
 }
@@ -363,7 +364,7 @@ export function SiteHeader() {
           <div
             className="manna-reveal manna-reveal--3 absolute left-[520px] top-[31px] z-10"
             style={{
-              width: "min(800px, calc(100vw - 700px))",
+              width: "min(800px, calc(100vw - 800px))",
             }}
           >
             <SearchForm

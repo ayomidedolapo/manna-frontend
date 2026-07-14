@@ -11,6 +11,71 @@ const base = {
   strokeLinejoin: "round" as const,
 };
 
+export function IconCelebration(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path
+        fill="#086453"
+        d="M4 20 14 6l4 4L4 20Z"
+      />
+      <path
+        fill="#00A14B"
+        d="M4 20 12 9l3 3L4 20Z"
+      />
+      <circle cx="18" cy="4" r="1.1" fill="#E0EE29" />
+      <circle cx="21" cy="8" r="0.9" fill="#5CD68A" />
+      <circle cx="16" cy="2" r="0.7" fill="#5CD68A" />
+      <circle cx="20.5" cy="3" r="0.6" fill="#086453" />
+      <path
+        stroke="#E0EE29"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        d="M15 8.5c.8-.2 1.6-.2 2.3.3M17 5.2c.5-.6 1.2-1 2-1.1"
+      />
+    </svg>
+  );
+}
+
+export function IconShoppingBag(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M6 8h12l-1 12a2 2 0 0 1-2 1.8H9a2 2 0 0 1-2-1.8L6 8Z" />
+      <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+    </svg>
+  );
+}
+
+export function IconGoogle(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path
+        fill="#4285F4"
+        d="M23.5 12.3c0-.85-.08-1.66-.22-2.45H12v4.63h6.46a5.52 5.52 0 0 1-2.4 3.63v3h3.87c2.27-2.09 3.57-5.17 3.57-8.81Z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 24c3.24 0 5.96-1.07 7.94-2.9l-3.87-3c-1.08.72-2.46 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.96H1.27v3.1A12 12 0 0 0 12 24Z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.27 14.29a7.2 7.2 0 0 1 0-4.58v-3.1H1.27a12 12 0 0 0 0 10.78l4-3.1Z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 4.75c1.76 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0A12 12 0 0 0 1.27 6.61l4 3.1C6.22 6.86 8.87 4.75 12 4.75Z"
+      />
+    </svg>
+  );
+}
+
+export function IconApple(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="#000000" {...props}>
+      <path d="M16.36 1.5c.12 1.05-.29 2.1-.92 2.87-.65.79-1.72 1.4-2.75 1.32-.14-1.02.34-2.09.94-2.79.68-.8 1.83-1.39 2.73-1.4Zm3.03 16.83c-.5 1.15-.74 1.66-1.38 2.68-.9 1.42-2.16 3.19-3.73 3.2-1.4.02-1.76-.9-3.65-.89-1.89.01-2.29.9-3.69.89-1.57-.02-2.76-1.62-3.66-3.03-2.5-3.9-2.76-8.48-1.22-10.92 1.1-1.74 2.83-2.76 4.46-2.76 1.66 0 2.7.91 4.07.91 1.33 0 2.13-.92 4.06-.92 1.45 0 2.99.79 4.08 2.15-3.59 1.97-3.01 7.09.66 8.69Z" />
+    </svg>
+  );
+}
+
 export function IconVerifiedBadge(props: SVGProps<SVGSVGElement>) {
   const lobes = Array.from({ length: 8 }, (_, i) => {
     const angle = (i * 45 * Math.PI) / 180;

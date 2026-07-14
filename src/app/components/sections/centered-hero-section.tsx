@@ -8,6 +8,12 @@ export type RotatingTitle = {
   rest: string;
 };
 
+export type AvatarBubble = {
+  label: string;
+  bg: string;
+  text: string;
+};
+
 type CenteredHeroSectionProps = {
   eyebrowIcon: ReactNode;
   eyebrowText: string;
@@ -15,6 +21,7 @@ type CenteredHeroSectionProps = {
   subtitle: string;
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string; external?: boolean };
+  avatarCluster?: AvatarBubble[];
 };
 
 const ROTATE_INTERVAL_MS = 6000;
@@ -27,6 +34,7 @@ export default function CenteredHeroSection({
   subtitle,
   primaryCta,
   secondaryCta,
+  avatarCluster,
 }: CenteredHeroSectionProps) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -99,7 +107,7 @@ export default function CenteredHeroSection({
         </div>
 
         {/* Main heading — rotates through options with a crossfade */}
-        <div className="mt-[clamp(28px,4vw,42px)] flex min-h-[clamp(4.5rem,14vw,10.5rem)] items-center">
+        <div className="relative mt-[clamp(28px,4vw,42px)] flex min-h-[clamp(4.5rem,14vw,10.5rem)] items-center">
           <h1
             aria-label={fullSentence}
             className={`max-w-[20ch] text-[clamp(32px,7vw,78px)] font-semibold leading-[1.04] tracking-[-0.045em] text-[#086453] transition-all duration-700 ease-in-out motion-reduce:transition-none ${
@@ -111,6 +119,28 @@ export default function CenteredHeroSection({
               {current.rest}
             </span>
           </h1>
+
+          {avatarCluster && avatarCluster.length > 0 && (
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-[-8px] right-[6%] hidden items-center min-[560px]:flex"
+            >
+              {avatarCluster.map((avatar, index) => (
+                <span
+                  key={avatar.label}
+                  className="grid h-[clamp(30px,3.4vw,44px)] w-[clamp(30px,3.4vw,44px)] place-items-center rounded-full border-2 border-[#fffdf0] text-[clamp(12px,1.3vw,16px)] font-semibold shadow-[0_6px_14px_rgba(7,39,32,0.18)]"
+                  style={{
+                    backgroundColor: avatar.bg,
+                    color: avatar.text,
+                    marginLeft: index === 0 ? 0 : "-10px",
+                    zIndex: avatarCluster.length - index,
+                  }}
+                >
+                  {avatar.label}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Subtitle — same color/size scale as homepage hero */}
