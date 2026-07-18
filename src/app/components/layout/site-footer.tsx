@@ -1,44 +1,60 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const socialLinks = [
   {
     label: "Facebook",
     icon: "/icons/ic_sharp-facebook.png",
+    href: "https://web.facebook.com/profile.php?id=61590402820247",
   },
   {
     label: "WhatsApp",
     icon: "/icons/basil_whatsapp-solid.png",
-  },
-  {
-    label: "LinkedIn",
-    icon: "/icons/uil_linkedin.png",
+    href:
+      "https://wa.me/2349063657802?text=" +
+      encodeURIComponent("Hi Manna, I'd like to know more."),
   },
   {
     label: "Instagram",
     icon: "/icons/formkit_instagram.png",
-  },
-  {
-    label: "X",
-    icon: "/icons/prime_twitter.png",
+    href: "https://www.instagram.com/manna_hub/",
   },
 ];
 
-const companyLinks = ["About Us", "Blog", "Contact Us", "About Career"];
-
-const customerServiceLinks = [
-  "My Account",
-  "Track Your Order",
-  "Refund",
-  "FAQs",
+const companyLinks = [
+  { label: "About Us", href: "/about-us" },
+  { label: "Blog", href: "/signup" },
+  { label: "Contact Us", href: "/signup" },
+  { label: "About Career", href: "/signup" },
 ];
 
 const informationLinks = [
-  "Privacy",
-  "User Terms and Conditions",
-  "Refund policy",
+  { label: "Privacy", href: "/signup" },
+  { label: "User Terms and Conditions", href: "/signup" },
+  { label: "Refund policy", href: "/signup" },
+];
+
+const customerServiceLinks = [
+  { label: "My Account", href: "/signup" },
+  { label: "Track Your Order", href: "/signup" },
+  { label: "Refund", href: "/signup" },
+  { label: "FAQs", href: "faq" },
 ];
 
 export default function SiteFooter() {
+  const pathname = usePathname();
+
+  const faqHref = pathname.startsWith("/b2b")
+    ? "/b2b#faq"
+    : pathname.startsWith("/sell-on-manna")
+      ? "/sell-on-manna#faq"
+      : "/#faq";
+
+  const resolveHref = (href: string) => (href === "faq" ? faqHref : href);
+
   return (
     <footer className="relative overflow-hidden border-t-2 border-[#FFFDED] bg-[#072720]">
       <Image
@@ -68,7 +84,7 @@ export default function SiteFooter() {
               </span>
 
               <span className="hidden min-[640px]:inline">
-                Manna connects local farmers and vendors
+                Manna connects local farmers
                 <br />
                 to you, delivering fresh Nigerian
                 <br />
@@ -82,7 +98,9 @@ export default function SiteFooter() {
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
-                  href="#"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="transition-transform duration-300 hover:-translate-y-0.5"
                 >
@@ -106,13 +124,13 @@ export default function SiteFooter() {
 
             <nav className="mt-3 flex flex-col gap-[17px] min-[640px]:mt-5 min-[640px]:gap-[20px]">
               {companyLinks.map((link) => (
-                <a
-                  key={link}
-                  href="#"
+                <Link
+                  key={link.label}
+                  href={resolveHref(link.href)}
                   className="text-[12px] font-normal leading-none text-[#FFFDED] transition-colors hover:text-[#E0EE29] min-[640px]:text-[clamp(0.875rem,1.45vw,1.1rem)]"
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </nav>
           </div>
@@ -125,13 +143,13 @@ export default function SiteFooter() {
 
             <nav className="mt-3 flex flex-col gap-[17px] min-[640px]:mt-5 min-[640px]:gap-[20px]">
               {informationLinks.map((link) => (
-                <a
-                  key={link}
-                  href="#"
+                <Link
+                  key={link.label}
+                  href={resolveHref(link.href)}
                   className="whitespace-nowrap text-[12px] font-normal leading-none text-[#FFFDED] transition-colors hover:text-[#E0EE29] min-[640px]:text-[clamp(0.875rem,1.45vw,1.1rem)]"
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </nav>
           </div>
@@ -171,21 +189,21 @@ export default function SiteFooter() {
 
             <nav className="mt-3 flex flex-col gap-[17px] min-[640px]:mt-5 min-[640px]:gap-[20px]">
               {customerServiceLinks.map((link) => (
-                <a
-                  key={link}
-                  href="#"
+                <Link
+                  key={link.label}
+                  href={resolveHref(link.href)}
                   className="text-[12px] font-normal leading-none text-[#FFFDED] transition-colors hover:text-[#E0EE29] min-[640px]:text-[clamp(0.875rem,1.45vw,1.1rem)]"
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </nav>
           </div>
         </div>
 
         <p className="mt-[46px] text-center text-[14px] leading-none text-[#FFFDED] min-[640px]:mt-[clamp(3.75rem,5.5vw,5.5rem)] min-[640px]:text-[clamp(0.9rem,1.2vw,1.05rem)]">
-  Copyright <span className="mx-1 text-[1.25em]">©</span> 2026.{" "}
-  <span className="text-[#E0EE29]">Manna.</span> All Rights Reserved.
+          Copyright <span className="mx-1 text-[1.25em]">©</span> 2026.{" "}
+          <span className="text-[#E0EE29]">Manna.</span> All Rights Reserved.
         </p>
       </div>
     </footer>

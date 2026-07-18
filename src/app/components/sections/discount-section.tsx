@@ -83,7 +83,7 @@ export default function DiscountSection() {
               </div>
 
               <a
-                href="#products"
+                href="/signup"
                 className="mt-[clamp(1.9rem,4.8vw,4.25rem)] flex h-[clamp(2.4rem,4.8vw,4.2rem)] w-[73%] items-center justify-center rounded-full bg-[linear-gradient(90deg,#00A14B_0%,#086453_100%)] px-6 text-[clamp(1rem,1.8vw,1.4rem)] font-medium text-white transition-transform duration-300 hover:scale-[1.02]"
               >
                 Shop now

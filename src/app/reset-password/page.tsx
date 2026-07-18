@@ -3,9 +3,12 @@
 import { Suspense, useState, type FormEvent } from "react";
 import AuthShell from "../components/layout/auth-shell";
 import AuthSuccessOverlay from "../components/layout/auth-success-overlay";
+import { IconEye, IconEyeOff } from "../components/ui/icons";
 
 function ResetPasswordForm() {
   const [values, setValues] = useState({ password: "", confirm: "" });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "submitting" | "done">(
     "idle",
@@ -44,23 +47,51 @@ function ResetPasswordForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-3">
-        <input
-          type="password"
-          required
-          placeholder="Enter new password"
-          value={values.password}
-          onChange={(event) => handleChange("password", event.target.value)}
-          className="h-[50px] w-full rounded-full border border-[#00A14B]/30 bg-white/60 px-5 text-[13.5px] text-[#072720] outline-none placeholder:text-[#072720]/50 focus:border-[#00A14B]"
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            required
+            placeholder="Enter new password"
+            value={values.password}
+            onChange={(event) => handleChange("password", event.target.value)}
+            className="h-[50px] w-full rounded-full border border-[#00A14B]/30 bg-white/60 px-5 pr-12 text-[13.5px] text-[#072720] outline-none placeholder:text-[#072720]/50 focus:border-[#00A14B]"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((current) => !current)}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            className="absolute right-4 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center text-[#086453]/60 hover:text-[#086453]"
+          >
+            {showPassword ? (
+              <IconEyeOff className="h-4 w-4" />
+            ) : (
+              <IconEye className="h-4 w-4" />
+            )}
+          </button>
+        </div>
 
-        <input
-          type="password"
-          required
-          placeholder="Confirm new password"
-          value={values.confirm}
-          onChange={(event) => handleChange("confirm", event.target.value)}
-          className="h-[50px] w-full rounded-full border border-[#00A14B]/30 bg-white/60 px-5 text-[13.5px] text-[#072720] outline-none placeholder:text-[#072720]/50 focus:border-[#00A14B]"
-        />
+        <div className="relative">
+          <input
+            type={showConfirm ? "text" : "password"}
+            required
+            placeholder="Confirm new password"
+            value={values.confirm}
+            onChange={(event) => handleChange("confirm", event.target.value)}
+            className="h-[50px] w-full rounded-full border border-[#00A14B]/30 bg-white/60 px-5 pr-12 text-[13.5px] text-[#072720] outline-none placeholder:text-[#072720]/50 focus:border-[#00A14B]"
+          />
+          <button
+            type="button"
+            onClick={() => setShowConfirm((current) => !current)}
+            aria-label={showConfirm ? "Hide password" : "Show password"}
+            className="absolute right-4 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center text-[#086453]/60 hover:text-[#086453]"
+          >
+            {showConfirm ? (
+              <IconEyeOff className="h-4 w-4" />
+            ) : (
+              <IconEye className="h-4 w-4" />
+            )}
+          </button>
+        </div>
 
         {error && (
           <p className="text-center text-[12px] text-[#c0392b]">{error}</p>
@@ -73,10 +104,6 @@ function ResetPasswordForm() {
         >
           {status === "submitting" ? "Updating…" : "Proceed"}
         </button>
-
-        <p className="!mt-3 text-center text-[11px] text-[#072720]/60">
-          This form is a preview — no password is actually changed yet.
-        </p>
       </form>
 
       {status === "done" && (

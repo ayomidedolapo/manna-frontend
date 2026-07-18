@@ -260,7 +260,7 @@ export function HeroSection() {
           }}
         >
           <a
-            href="#shop"
+            href="/signup"
             className="group flex h-[64px] items-center gap-5 rounded-full px-8 text-[19px] text-white shadow-[0_14px_28px_rgba(0,161,75,0.27)] transition-transform duration-300 hover:-translate-y-1"
             style={{
               background:
@@ -275,7 +275,7 @@ export function HeroSection() {
           </a>
 
           <a
-            href="#shop"
+            href="/signup"
             className="group flex h-[52px] items-center gap-4 border-b-2 border-[#08715a] pb-[2px] text-[19px] text-[#009b52] transition-colors hover:text-[#08715a]"
           >
             <span>View available products</span>
@@ -438,7 +438,7 @@ export function HeroSection() {
 
         <div className="mt-[128px] flex w-full max-w-[310px] flex-col items-center gap-[15px]">
           <a
-            href="#shop"
+            href="/signup"
             className="flex h-[54px] w-full items-center justify-center rounded-full text-[16px] text-white shadow-[0_12px_24px_rgba(0,161,75,0.22)] transition-transform duration-300 hover:-translate-y-1"
             style={{
               background:
@@ -449,7 +449,7 @@ export function HeroSection() {
           </a>
 
           <a
-            href="#shop"
+            href="/signup"
             className="flex h-[54px] w-full items-center justify-center rounded-full bg-[#dcffca] text-[16px] text-[#009b52] transition-transform duration-300 hover:-translate-y-1"
           >
             View available products

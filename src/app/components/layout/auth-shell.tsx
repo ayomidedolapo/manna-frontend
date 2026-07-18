@@ -41,11 +41,14 @@ export default function AuthShell({ children }: AuthShellProps) {
             />
           </Link>
 
-          <div className="max-w-[420px]" suppressHydrationWarning>
+          <div className="max-w-[420px]">
             <span className="text-[32px] leading-none text-[#5CD68A]">
               &ldquo;
             </span>
-            <p className="text-[clamp(1.25rem,2vw,1.6rem)] font-bold leading-[1.35] text-white">
+            <p
+              suppressHydrationWarning
+              className="text-[clamp(1.25rem,2vw,1.6rem)] font-bold leading-[1.35] text-white"
+            >
               {quote}
             </p>
             <span className="mt-1 block text-right text-[32px] leading-none text-[#5CD68A]">

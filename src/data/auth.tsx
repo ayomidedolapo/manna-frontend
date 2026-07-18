@@ -4,7 +4,6 @@ export type SignupFieldConfig = {
   type: "text" | "email" | "tel" | "password" | "select" | "textarea" | "checkbox";
   placeholder: string;
   options?: string[];
-  /** Only render this field if another field currently equals a given value. */
   showIf?: { field: string; equals: string };
 };
 
@@ -17,39 +16,47 @@ export const nigeriaStates: string[] = [
 ];
 
 export const customerSignupFields: SignupFieldConfig[] = [
-  { name: "fullName", label: "Full name", type: "text", placeholder: "Enter your full name" },
+  { name: "firstName", label: "First name", type: "text", placeholder: "Enter your first name" },
+  { name: "lastName", label: "Last name", type: "text", placeholder: "Enter your last name" },
   { name: "email", label: "Email address", type: "email", placeholder: "Enter your email address" },
   { name: "password", label: "Password", type: "password", placeholder: "Enter your password" },
-  { name: "location", label: "State and country", type: "text", placeholder: "Enter your state and country" },
+  { name: "confirmPassword", label: "Confirm password", type: "password", placeholder: "Re-enter your password" },
+  {
+    name: "state",
+    label: "State",
+    type: "select",
+    placeholder: "Select your state",
+    options: nigeriaStates,
+  },
+  { name: "deliveryAddress", label: "Delivery address", type: "text", placeholder: "Enter your delivery address" },
+  { name: "landmark", label: "Nearest bus stop / landmark", type: "text", placeholder: "e.g. Opposite First Bank, Ikeja" },
   { name: "phone", label: "Phone number", type: "tel", placeholder: "Enter your phone number" },
 ];
 
-export const vendorSignupFields: SignupFieldConfig[] = [
-  { name: "fullName", label: "Full name", type: "text", placeholder: "Enter your full name" },
-  { name: "businessName", label: "Business / farm name", type: "text", placeholder: "e.g. Okafor Farms" },
+// Step 1 — personal details
+export const vendorSignupStep1Fields: SignupFieldConfig[] = [
+  { name: "firstName", label: "First name", type: "text", placeholder: "Enter your first name" },
+  { name: "lastName", label: "Last name", type: "text", placeholder: "Enter your last name" },
   { name: "email", label: "Email address", type: "email", placeholder: "Enter your email address" },
   { name: "password", label: "Password", type: "password", placeholder: "Enter your password" },
+  { name: "confirmPassword", label: "Confirm password", type: "password", placeholder: "Re-enter your password" },
+  { name: "phone", label: "Phone number", type: "tel", placeholder: "Enter your phone number" },
+];
+
+// Step 2 — business details
+export const vendorSignupStep2Fields: SignupFieldConfig[] = [
+  { name: "businessName", label: "Business / farm name", type: "text", placeholder: "e.g. Okafor Farms" },
   {
     name: "businessType",
     label: "Business type",
     type: "select",
     placeholder: "Select your business type",
     options: [
-      "Farmer",
-      "Farm Cooperative",
-      "Fresh Produce Supplier",
-      "Grocery Store",
-      "Supermarket",
-      "Market Trader",
-      "Meat Vendor",
-      "Seafood Vendor",
-      "Poultry & Eggs Supplier",
-      "Grain & Legume Supplier",
-      "Spice & Dry Food Supplier",
-      "Root & Tuber Supplier",
-      "Fruit Vendor",
-      "Food Distributor",
-      "Other",
+      "Farmer", "Farm Cooperative", "Fresh Produce Supplier", "Grocery Store",
+      "Supermarket", "Market Trader", "Meat Vendor", "Seafood Vendor",
+      "Poultry & Eggs Supplier", "Grain & Legume Supplier",
+      "Spice & Dry Food Supplier", "Root & Tuber Supplier", "Fruit Vendor",
+      "Food Distributor", "Other",
     ],
   },
   {
@@ -63,7 +70,7 @@ export const vendorSignupFields: SignupFieldConfig[] = [
     label: "Years in operation",
     type: "select",
     placeholder: "Select a range",
-    options: ["Less than 1 year", "1–2 years", "3–5 years", "6–10 years", "10+ years"],
+    options: ["Less than 1 year", "1-2 years", "3-5 years", "6-10 years", "10+ years"],
   },
   {
     name: "productSource",
@@ -71,12 +78,9 @@ export const vendorSignupFields: SignupFieldConfig[] = [
     type: "select",
     placeholder: "Select an option",
     options: [
-      "I grow them myself",
-      "I buy directly from farmers",
-      "I buy from wholesalers",
-      "I buy from local markets",
-      "I process/manufacture them",
-      "Other",
+      "I grow them myself", "I buy directly from farmers",
+      "I buy from wholesalers", "I buy from local markets",
+      "I process/manufacture them", "Other",
     ],
   },
   {
@@ -106,7 +110,12 @@ export const vendorSignupFields: SignupFieldConfig[] = [
     type: "text",
     placeholder: "Enter your LGA",
   },
-  { name: "phone", label: "Phone number", type: "tel", placeholder: "Enter your phone number" },
+  {
+    name: "pickupAddress",
+    label: "Business / pickup address",
+    type: "text",
+    placeholder: "Enter the address orders will be picked up from",
+  },
   {
     name: "agreeToTerms",
     label:

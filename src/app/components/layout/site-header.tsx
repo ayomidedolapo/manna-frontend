@@ -364,7 +364,7 @@ export function SiteHeader() {
           <div
             className="manna-reveal manna-reveal--3 absolute left-[520px] top-[31px] z-10"
             style={{
-              width: "min(800px, calc(100vw - 800px))",
+              width: "min(700px, calc(100vw - 800px))",
             }}
           >
             <SearchForm

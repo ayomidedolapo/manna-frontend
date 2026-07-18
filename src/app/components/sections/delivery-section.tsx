@@ -21,11 +21,11 @@ export default function DeliverySection() {
 
           <p className="mx-auto mt-3 max-w-[330px] text-[clamp(0.78rem,3.2vw,0.95rem)] leading-[1.5] tracking-[-0.02em] text-[#072720] min-[640px]:mt-6 min-[640px]:max-w-[300px] min-[640px]:text-[clamp(0.9rem,1.25vw,1.3rem)]">
             Staples like rice, oil, and veggies—order now and get delivery in
-            minutes. We’ve got you in Lagos.
+            hours. We’ve got you in Lagos.
           </p>
 
           <a
-            href="#products"
+            href="/signup"
             className="mx-auto mt-7 flex h-[3.2rem] w-full max-w-[340px] items-center justify-center rounded-full bg-[linear-gradient(90deg,#00A14B_0%,#086453_100%)] px-8 text-[1rem] font-medium text-white transition-transform duration-300 hover:scale-[1.02] min-[640px]:mt-14 min-[640px]:h-[4.1rem] min-[640px]:w-[19rem] min-[640px]:max-w-none min-[640px]:text-[clamp(1rem,1.2vw,1.3rem)]"
           >
             <span>Shop now</span>

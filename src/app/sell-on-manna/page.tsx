@@ -59,11 +59,13 @@ export default function SellOnMannaPage() {
         note="Exact commission details are confirmed during vendor onboarding, before you list your first product."
       />
 
-      <AudienceFaqSection
-        eyebrow="FAQ"
-        title="Questions vendors ask us"
-        faqs={vendorFaqs}
-      />
+      <div id="faq">
+        <AudienceFaqSection
+          eyebrow="FAQ"
+          title="Questions vendors ask us"
+          faqs={vendorFaqs}
+        />
+      </div>
 
       <SiteFooter />
     </main>

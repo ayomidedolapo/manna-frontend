@@ -50,10 +50,6 @@ export default function ForgotPasswordPage() {
           {status === "submitting" ? "Sending code…" : "Proceed"}
         </button>
 
-        <p className="!mt-3 text-center text-[11px] text-[#072720]/60">
-          This form is a preview — no email is sent yet.
-        </p>
-
         <div className="!mt-5 flex items-center gap-3">
           <span className="h-px flex-1 bg-[#00A14B]/20" />
           <span className="text-[11px] text-[#072720]/60">

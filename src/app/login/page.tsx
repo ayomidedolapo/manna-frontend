@@ -4,10 +4,11 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import AuthShell from "../components/layout/auth-shell";
 import AuthSuccessOverlay from "../components/layout/auth-success-overlay";
-import { IconGoogle, IconApple } from "../components/ui/icons";
+import { IconGoogle, IconApple, IconEye, IconEyeOff } from "../components/ui/icons";
 
 export default function LoginPage() {
   const [values, setValues] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState<"idle" | "submitting" | "done">(
     "idle",
   );
@@ -48,16 +49,30 @@ export default function LoginPage() {
             className="h-[50px] w-full rounded-full border border-[#00A14B]/30 bg-white/60 px-5 text-[13.5px] text-[#072720] outline-none placeholder:text-[#072720]/50 focus:border-[#00A14B]"
           />
 
-          <input
-            type="password"
-            required
-            placeholder="Enter your password"
-            value={values.password}
-            onChange={(event) =>
-              handleChange("password", event.target.value)
-            }
-            className="h-[50px] w-full rounded-full border border-[#00A14B]/30 bg-white/60 px-5 text-[13.5px] text-[#072720] outline-none placeholder:text-[#072720]/50 focus:border-[#00A14B]"
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              required
+              placeholder="Enter your password"
+              value={values.password}
+              onChange={(event) =>
+                handleChange("password", event.target.value)
+              }
+              className="h-[50px] w-full rounded-full border border-[#00A14B]/30 bg-white/60 px-5 pr-12 text-[13.5px] text-[#072720] outline-none placeholder:text-[#072720]/50 focus:border-[#00A14B]"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((current) => !current)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              className="absolute right-4 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center text-[#086453]/60 hover:text-[#086453]"
+            >
+              {showPassword ? (
+                <IconEyeOff className="h-4 w-4" />
+              ) : (
+                <IconEye className="h-4 w-4" />
+              )}
+            </button>
+          </div>
 
           <div className="!mt-2 text-right">
             <Link
@@ -75,10 +90,6 @@ export default function LoginPage() {
           >
             {status === "submitting" ? "Logging in…" : "Log In"}
           </button>
-
-          <p className="!mt-3 text-center text-[11px] text-[#072720]/60">
-            This form is a preview — no data is sent yet.
-          </p>
 
           <div className="!mt-5 flex items-center gap-3">
             <span className="h-px flex-1 bg-[#00A14B]/20" />

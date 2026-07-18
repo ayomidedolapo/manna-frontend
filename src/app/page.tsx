@@ -15,7 +15,9 @@ export default function HomePage() {
       <FeaturesSection />
       <DeliverySection />
       <DiscountSection />
-      <FaqSection />
+      <div id="faq">
+        <FaqSection />
+      </div>
       <NewsletterSection />
       <SiteFooter />
      </main>

@@ -13,25 +13,26 @@ const base = {
 
 export function IconCelebration(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" {...props}>
-      <path
-        fill="#086453"
-        d="M4 20 14 6l4 4L4 20Z"
-      />
-      <path
-        fill="#00A14B"
-        d="M4 20 12 9l3 3L4 20Z"
-      />
-      <circle cx="18" cy="4" r="1.1" fill="#E0EE29" />
-      <circle cx="21" cy="8" r="0.9" fill="#5CD68A" />
-      <circle cx="16" cy="2" r="0.7" fill="#5CD68A" />
-      <circle cx="20.5" cy="3" r="0.6" fill="#086453" />
-      <path
-        stroke="#E0EE29"
-        strokeWidth="1.3"
-        strokeLinecap="round"
-        d="M15 8.5c.8-.2 1.6-.2 2.3.3M17 5.2c.5-.6 1.2-1 2-1.1"
-      />
+    <svg viewBox="0 0 24 24" fill="none" stroke="#0B3A30" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      {/* Party horn */}
+      <path d="M6 21 11.5 6.5c.3-.8 1.4-.8 1.7 0L18 21c.2.6-.3 1.2-.9 1L11 20l-6.1 2c-.6.2-1.1-.4-.9-1Z" />
+      <path d="M8.3 14.5c1.8-.6 3.6-.6 5.4 0" />
+      <path d="M7 18c2.6-.9 5.4-.9 8 0" />
+
+      {/* Confetti dots */}
+      <circle cx="4.2" cy="4.5" r="0.9" fill="#0B3A30" stroke="none" />
+      <circle cx="9.2" cy="4" r="0.7" fill="#0B3A30" stroke="none" />
+      <circle cx="15.8" cy="15.5" r="0.8" fill="#0B3A30" stroke="none" />
+
+      {/* Squiggle ribbon */}
+      <path d="M6.3 8.2c.9-.9.9-1.9 0-2.8" />
+      <path d="M7.6 9.7c1.3-.3 2-1.1 2-2.4" />
+
+      {/* Star */}
+      <path d="m17 6 .6 1.3L19 7.9l-1.1.9.3 1.4-1.2-.8-1.2.8.3-1.4-1.1-.9 1.4-.6Z" />
+
+      {/* Heart/loop */}
+      <path d="M20.3 12.2c1-.5 1.9 0 1.9 1 0 .9-1.1 1.7-1.9 2.1-.8-.4-1.9-1.2-1.9-2.1 0-1 .9-1.5 1.9-1Z" />
     </svg>
   );
 }
@@ -104,6 +105,25 @@ export function IconVerifiedBadge(props: SVGProps<SVGSVGElement>) {
         strokeLinejoin="round"
         d="m7.7 12.3 3 3 5.6-6.2"
       />
+    </svg>
+  );
+}
+
+export function IconEye(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+export function IconEyeOff(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M3 3l18 18" />
+      <path d="M10.6 5.2A9.4 9.4 0 0 1 12 5c6.5 0 10 7 10 7a15.6 15.6 0 0 1-3.3 4.2M6.6 6.6C4 8.3 2 12 2 12s3.5 7 10 7c1.4 0 2.6-.3 3.7-.8" />
+      <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
     </svg>
   );
 }

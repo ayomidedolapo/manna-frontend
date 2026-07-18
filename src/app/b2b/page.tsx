@@ -84,17 +84,19 @@ export default function B2BPage() {
         note="Reach out below and we'll follow up with a custom quote before you commit to anything."
       />
 
-      <AudienceFaqSection
-        eyebrow="FAQ"
-        title="Questions businesses ask us"
-        faqs={b2bFaqs}
-      />
+      <div id="faq">
+        <AudienceFaqSection
+          eyebrow="FAQ"
+          title="Questions businesses ask us"
+          faqs={b2bFaqs}
+        />
+      </div>
 
       <SignupFormSection
         id="b2b-signup"
         eyebrow="Get started"
         title="Request business pricing"
-        description="Tell us about your business and your order needs, and we'll follow up with a custom quote."
+        description="Tell us about your business. This is a preview of the request form — it isn't connected to a backend yet."
         fields={b2bSignupFields}
         submitLabel="Request a quote"
         successTitle="Thanks — we've got your request!"

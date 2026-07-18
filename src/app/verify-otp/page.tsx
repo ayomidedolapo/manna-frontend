@@ -140,10 +140,6 @@ function VerifyOtpForm() {
         >
           {status === "submitting" ? "Verifying…" : "Verify"}
         </button>
-
-        <p className="mt-3 text-center text-[11px] text-[#072720]/60">
-          This is a preview — any 6 digits will work.
-        </p>
       </form>
 
       {status === "done" && flow === "signup" && (

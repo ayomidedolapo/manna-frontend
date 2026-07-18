@@ -45,9 +45,9 @@ export const aboutUsTeam: TeamMember[] = [
 
 export const founderStoryParagraphs: string[] = [
   "Manna began with a simple frustration — getting fresh food in the city shouldn't feel like a chore.",
-  "We saw people navigating inconsistent prices, unreliable supply, and the stress of moving from one market to another just to find basic groceries. At the same time, farmers and suppliers lacked a direct, structured way to reach everyday customers.",
-  "So, we built Manna.",
-  "We didn't start with perfection. We started small — an MVP focused on doing one thing exceptionally well: making quality food accessible, fast, and reliable.",
-  "Soon, we're building something bigger — a connected, multi-vendor platform where farmers, suppliers, and businesses can trade seamlessly, and customers can get what they need without the usual friction.",
-  "Manna is still growing, but our mission remains clear: to simplify food access and create a system that works for everyone.",
+  "We saw people navigating inconsistent prices, unreliable supply, and the stress of moving from one market to another just to find basic groceries. At the same time, farmers, vendors, and suppliers had no direct, structured way to reach everyday customers and businesses.",
+  "So, we built Manna — not as a single store, but as a marketplace from day one.",
+  "Our vision has always been to connect multiple farmers, vendors, and suppliers directly to the people and businesses that need them, all on one platform. No middlemen taking the biggest cut, and no vendor locked out for being too small.",
+  "We're building the infrastructure — the platform, the delivery network, the trust and verification systems — so that any vendor, from a single farmer to an established supplier, can plug in and reach customers reliably.",
+  "Manna is still growing, but our mission remains clear: to simplify food access and build a marketplace that genuinely works for everyone — farmers, vendors, businesses, and the households that depend on them.",
 ];
