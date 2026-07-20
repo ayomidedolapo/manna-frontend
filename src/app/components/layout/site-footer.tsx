@@ -79,12 +79,12 @@ export default function SiteFooter() {
 
             <p className="mt-4 max-w-[220px] text-[13px] leading-[1.45] text-[#FFFDED] min-[640px]:mt-4 min-[640px]:max-w-[260px] min-[640px]:text-[15px] min-[640px]:leading-[1.45]">
               <span className="min-[640px]:hidden">
-                Manna connects local farmers to you, delivering fresh Nigerian
+                Manna connects trusted local farmers and vendors to you, delivering fresh Nigerian
                 produce straight to your door. Support local, eat fresh!
               </span>
 
               <span className="hidden min-[640px]:inline">
-                Manna connects local farmers
+                Manna connects trusted local farmers and vendors
                 <br />
                 to you, delivering fresh Nigerian
                 <br />

@@ -13,7 +13,10 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Manna",
-  description: "Fresh farm products at your fingertips.",
+  description: "Fresh Groceries at your fingertips.",
+  icons:{
+    icon: "/favicon.ico",
+  }
 };
 
 export default function RootLayout({
